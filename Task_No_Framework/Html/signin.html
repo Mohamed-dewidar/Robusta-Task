@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up | Robusta</title>
+
+    <!--Style Sheets-->
+    <link rel="stylesheet" href="../Styles/style.css" />
+
+    <!--Validator.js CDN-->
+    <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
+
+    <!-- Add the Font Awesome CSS link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!--Scripts-->
+    <script src="../Scripts/signin.js"></script>
+  </head>
+  <body>
+    <form
+    >
+      <div class="form-group">
+        <span>Email</span>
+        <input type="text" id="email" data-email required />
+        <p class="err-msg hide" data-emailErr>Enter a valid email</p>
+      </div>
+      <div class="form-group">
+        <span>Password</span>
+        <input type="password" id="password" data-password required />
+        <ul class="err-msg hide" data-passwordErr></ul>
+      </div>
+      
+      <div>
+          <input type="submit" value="SIGN IN" data-signinBtn />
+            <p class="err-msg hide" data-signinErr>No Account with that email</p>
+      </div>
+      
+      <div id="loadingSpinner" style="display: none;">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+      <p>Are you new here? <a href="signup.html">SIGN UP</a></p>
+    </form>
+  </body>
+</html>
