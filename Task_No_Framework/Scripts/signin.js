@@ -9,11 +9,11 @@ let passwordElement; // Input element for user's password
 let passwordErrElement; // element for password error message
 
 let signinBtn; // Sign IN button element
-let signinErrElement;
+let signinErrElement; // element for singin error message
 
 // script variables
-let emailError = false; // boolean to check if the email is invalid before submit
-let passwordError = false; // boolean to check if the password is invalid before submit
+let emailError = true; // boolean to check if the email is invalid before submit
+let passwordError = true; // boolean to check if the password is invalid before submit
 
 // Wait for the page to load before running the script
 addEventListener("load", scriptBegins);
@@ -27,7 +27,7 @@ function scriptBegins() {
   passwordErrElement = document.querySelector("[data-passwordErr]");
 
   signinBtn = document.querySelector("[data-signinBtn]");
-  signinErrElement = document.querySelector("[data-signinErr]")
+  signinErrElement = document.querySelector("[data-signinErr]");
 
   // Attach eventListeners to The elements
   emailElement.addEventListener("blur", validateEmail);
@@ -122,7 +122,7 @@ function isValidPassword(password) {
 
 function singinHandler(event) {
   event.preventDefault();
-  console.log(emailError, passwordError);
+
   if (emailError || passwordError) {
     return;
   }
@@ -145,24 +145,22 @@ function singinHandler(event) {
 
     if (xhr.status === 200) {
       const data = JSON.parse(xhr.responseText);
-
     } else {
-        signinErrElement.classList.remove('hide')
-        setTimeout(() => {
-            signinErrElement.classList.add('hide')
-        }, 2000)
+      signinErrElement.classList.remove("hide");
+      setTimeout(() => {
+        signinErrElement.classList.add("hide");
+      }, 2000);
     }
   };
 
   xhr.onerror = function () {
     // Hide the loading spinner after the response returns
     loadingSpinner.style.display = "none";
-    signinErrElement.classList.remove('hide')
-        setTimeout(() => {
-            signinErrElement.classList.add('hide')
-        }, 2000)
+    signinErrElement.classList.remove("hide");
+    setTimeout(() => {
+      signinErrElement.classList.add("hide");
+    }, 2000);
   };
 
   xhr.send(body);
 }
-

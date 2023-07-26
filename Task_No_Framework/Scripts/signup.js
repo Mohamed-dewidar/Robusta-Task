@@ -1,7 +1,6 @@
 var API_URL = "https://private-b2e6827-robustatask.apiary-mock.com";
 var API_PATH_SIGNUP = "/auth/register";
 
-
 // Variables to store references to HTML elements
 let fullNameElement; // Input element for user's full name
 let fullNameErrElement; // element for fullname error message
@@ -19,13 +18,14 @@ let confirmPasswordElemnt; // Input element for user's confirm password
 let confirmPasswordErrElemnt; // element for confirm password error message
 
 let signupBtn; // Sign Up button element
+let signupErrElement; // element for singup error message
 
 // script variables
-let fullNameError = false; // boolean to check if the fullname is invalid before submit
-let emailError = false; // boolean to check if the email is invalid before submit
-let userNameError = false; // boolean to check if the username is invalid before submit
-let passwordError = false; // boolean to check if the password is invalid before submit
-let confirmPasswordError = false; // boolean to check if the confirm password is invalid before submit
+let fullNameError = true; // boolean to check if the fullname is invalid before submit
+let emailError = true; // boolean to check if the email is invalid before submit
+let userNameError = true; // boolean to check if the username is invalid before submit
+let passwordError = true; // boolean to check if the password is invalid before submit
+let confirmPasswordError = true; // boolean to check if the confirm password is invalid before submit
 
 // Wait for the page to load before running the script
 addEventListener("load", scriptBegins);
@@ -50,6 +50,7 @@ function scriptBegins() {
   );
 
   signupBtn = document.querySelector("[data-signupBtn]");
+  signupErrElement = document.querySelector("[data-signupErr]");
 
   // Attach eventListeners to The elements
   fullNameElement.addEventListener("blur", validateFullname);
@@ -57,6 +58,7 @@ function scriptBegins() {
   userNameElement.addEventListener("blur", validateUsername);
   passwordElement.addEventListener("blur", validatePassword);
   confirmPasswordElemnt.addEventListener("blur", validateConfirmPassword);
+  signupBtn.addEventListener("click", singupHandler);
 }
 
 /**
@@ -185,4 +187,49 @@ function isValidPassword(password) {
   }
 
   return errMsgs;
+}
+
+async function singupHandler(event) {
+  event.preventDefault();
+
+  if (
+    fullNameError ||
+    emailError ||
+    userNameError ||
+    passwordError ||
+    confirmPasswordError
+  ) {
+    return;
+  }
+
+  // Show the loading spinner before making the XHR request
+  loadingSpinner.style.display = "block";
+
+  const body = {
+    name: fullNameElement.value,
+    email: emailElement.value,
+    username: userNameElement.value,
+    password: passwordElement.value,
+  };
+
+  try {
+    // Send form data to the server using Fetch API
+    let res = await fetch(`${API_URL}${API_PATH_SIGNUP}`, {
+      method: "POST",
+      body: body,
+    });
+    let data = await res.json();
+    signupErrElement.textContent = data.message;
+    signupErrElement.style.color = 'green'
+    console.log(data);
+  } catch (e) {
+    signupErrElement.textContent = 'Something went wrong';
+  }
+
+  signupErrElement.classList.remove("hide");
+  setTimeout(() => {
+    signupErrElement.classList.add("hide");
+    window.location.href = '../Html/signin.html'
+  }, 2000);
+  loadingSpinner.style.display = "none";
 }
