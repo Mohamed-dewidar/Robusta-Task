@@ -4,16 +4,19 @@ var API_PATH_SIGNIN = "/auth/login";
 
 // Variables to store references to HTML elements
 let fullNameElement; // Input element for user's full name
-let fullNameErrElement; // element for fullname error msg
+let fullNameErrElement; // element for fullname error message
 
 let emailElement; // Input element for user's email
-let emailErrElement; // element for email error msg
+let emailErrElement; // element for email error message
 
 let userNameElement; // Input element for user's username
-let userNameErrElement; // element for username error msg
+let userNameErrElement; // element for username error message
 
 let passwordElement; // Input element for user's password
-let passwordErrElement; // element for password error msg
+let passwordErrElement; // element for password error message
+
+let confirmPasswordElemnt; // Input element for user's confirm password
+let confirmPasswordErrElemnt; // element for confirm password error message
 
 let signupBtn; // Sign Up button element
 
@@ -22,6 +25,7 @@ let fullNameError = false; // boolean to check if the fullname is invalid before
 let emailError = false; // boolean to check if the email is invalid before submit
 let userNameError = false; // boolean to check if the username is invalid before submit
 let passwordError = false; // boolean to check if the password is invalid before submit
+let confirmPasswordError = false; // boolean to check if the confirm password is invalid before submit
 
 // Wait for the page to load before running the script
 addEventListener("load", scriptBegins);
@@ -40,13 +44,19 @@ function scriptBegins() {
   passwordElement = document.querySelector("[data-password]");
   passwordErrElement = document.querySelector("[data-passwordErr]");
 
+  confirmPasswordElemnt = document.querySelector("[data-confirmPassword]");
+  confirmPasswordErrElemnt = document.querySelector(
+    "[data-confirmPasswordErr]",
+  );
+
   signupBtn = document.querySelector("[data-signupBtn]");
 
   // Attach eventListeners to The elements
   fullNameElement.addEventListener("blur", validateFullname);
   emailElement.addEventListener("blur", validateEmail);
   userNameElement.addEventListener("blur", validateUsername);
-  passwordElement.addEventListener("blur", validatePassword)
+  passwordElement.addEventListener("blur", validatePassword);
+  confirmPasswordElemnt.addEventListener("blur", validateConfirmPassword);
 }
 
 /**
@@ -100,67 +110,78 @@ function validateUsername(event) {
   userNameError = false;
 }
 
+function validatePassword(event) {
+  let password = event.target.value;
+  let errMsgs = isValidPassword(password);
 
-function validatePassword(event){
-  let password = event.target.value
-  let errMsgs = isValidPassword(password)
-
-  if(errMsgs.length){
-    while(passwordErrElement.firstChild){
-      passwordErrElement.removeChild(passwordErrElement.firstChild)
+  if (errMsgs.length) {
+    while (passwordErrElement.firstChild) {
+      passwordErrElement.removeChild(passwordErrElement.firstChild);
     }
-    passwordElement.classList.add("invalid")
-    passwordErrElement.classList.remove('hide')
-    passwordError = true
+    passwordElement.classList.add("invalid");
+    passwordErrElement.classList.remove("hide");
+    passwordError = true;
 
-    for(let msg of errMsgs){
-      const newListItem = document.createElement('li')
-      newListItem.textContent = msg
-      passwordErrElement.appendChild(newListItem)
+    for (let msg of errMsgs) {
+      const newListItem = document.createElement("li");
+      newListItem.textContent = msg;
+      passwordErrElement.appendChild(newListItem);
     }
-  
-    return
+
+    return;
   }
-  
-  passwordElement.classList.remove("invalid")
-  passwordErrElement.classList.add('hide')
-  passwordError = false
+
+  passwordElement.classList.remove("invalid");
+  passwordErrElement.classList.add("hide");
+  passwordError = false;
 }
 
+function validateConfirmPassword(event) {
+  let confirmPassword = event.target.value;
+  console.log(passwordElement.value)
+  if (confirmPassword !== passwordElement.value) {
+    confirmPasswordElemnt.classList.add("invalid");
+    confirmPasswordErrElemnt.classList.remove("hide");
+    confirmPasswordError = true;
+    return;
+  }
+  confirmPasswordElemnt.classList.remove("invalid");
+  confirmPasswordErrElemnt.classList.add("hide");
+  confirmPasswordError = false;
+}
 
 /**
- * 
+ *
  * This function takes an input param the password
  * It check that password is valid
  * It returns an error messages array
  * Thar array will be used to disp;ay the error messages for missing password pattern
  */
 function isValidPassword(password) {
-
-  let errMsgs = []
+  let errMsgs = [];
   // Validate password length (at least 8 characters)
   if (!validator.isLength(password, { min: 8 })) {
-    errMsgs.push('Password must be at least 8 characters long.')
+    errMsgs.push("Password must be at least 8 characters long.");
   }
 
   // Validate at least one uppercase letter
   if (!/[A-Z]/.test(password)) {
-    errMsgs.push('at least one uppercase letter.')
+    errMsgs.push("at least one uppercase letter.");
   }
 
   // Validate at least one lowercase letter
   if (!/[a-z]/.test(password)) {
-    errMsgs.push('at least one lowercase letter.')
+    errMsgs.push("at least one lowercase letter.");
   }
 
   // Validate at least one special character
   if (!/[@$!%*#?&]/.test(password)) {
-    errMsgs.push('least one special character')
+    errMsgs.push("least one special character");
   }
 
   // Validate at least one digit (number)
   if (!/\d/.test(password)) {
-    errMsgs.push('at least one number')
+    errMsgs.push("at least one number");
   }
 
   return errMsgs;
