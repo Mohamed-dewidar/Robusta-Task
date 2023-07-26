@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up | Robusta</title>
+
+    <!--Style Sheets-->
+    <link rel="stylesheet" href="../Styles/style.css" />
+
+    <!--Validator.js CDN-->
+    <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
+
+    <!--Scripts-->
+    <script src="../Scripts/signup.js"></script>
+  </head>
+  <body>
+    <form
+      action="https://private-b2e6827-robustatask.apiary-mock.com/auth/register"
+      method="post"
+    >
+      <div class="form-group">
+        <span>Full Name</span>
+        <input type="text" id="name" data-fullname required />
+        <p class="err-msg hide" data-fullnameErr>Enter a valid full name</p>
+      </div>
+      <div class="form-group">
+        <span>Email</span>
+        <input type="text" id="email" data-email required />
+        <p class="err-msg hide" data-emailErr>Enter a valid email</p>
+      </div>
+      <div class="form-group">
+        <span>Username</span>
+        <input type="text" id="username" data-username required />
+        <ul class="err-msg hide" data-usernameErr>
+          <li>
+            User name must be letters only
+          </li>
+          <li>
+            No spaces allowed
+          </li>
+        </ul>
+      </div>
+      <div class="form-group">
+        <span>Password</span>
+        <input type="password" id="password" data-password required />
+        <ul class="err-msg hide" data-passwordErr></ul>
+      </div>
+      <input type="submit" value="Sign Up" data-signupBtn />
+    </form>
+  </body>
+</html>
