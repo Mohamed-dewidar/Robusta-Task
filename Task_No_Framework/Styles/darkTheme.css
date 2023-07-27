@@ -20,6 +20,18 @@ body.dark-theme::after{
 .input-field.dark-theme{
     background-color: var(--bs-dark);
 }
+.input-field.dark-theme::-webkit-input-placeholder{
+    color: wheat
+}
+.input-field.dark-theme::-moz-placeholder{
+    color: wheat
+}
+.input-field.dark-theme:-ms-input-placeholder{
+    color: wheat
+}
+.input-field.dark-theme::-ms-input-placeholder{
+    color: wheat
+}
 .input-field.dark-theme::placeholder{
     color: wheat
 }

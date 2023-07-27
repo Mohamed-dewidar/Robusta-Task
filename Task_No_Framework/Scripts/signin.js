@@ -43,8 +43,8 @@ function scriptBegins() {
  */
 
 function validateEmail(event) {
-  let email = event.target.value.trim()
-  console.log(email)
+  let email = event.target.value.trim();
+
   if (!validator.isEmail(email)) {
     emailElement.parentElement.classList.add("invalid");
     emailErrElement.classList.remove("hide");
@@ -120,18 +120,14 @@ function isValidPassword(password) {
   return errMsgs;
 }
 
-
-
-
 /**
- * 
+ *
  * This Function will get called when click the submit button
  * - It will return and do no thing if any validation Error where presented
  * - otherwise it will send the request to server, then wait response
  */
 function singinHandler(event) {
   event.preventDefault();
-
 
   if (!event.target.form.reportValidity() || emailError || passwordError) {
     return;
@@ -155,7 +151,7 @@ function singinHandler(event) {
 
     if (xhr.status === 200) {
       const data = JSON.parse(xhr.responseText);
-      alert(data.message)
+      alert(data.message);
     } else {
       signinErrElement.classList.remove("hide");
       setTimeout(() => {
@@ -172,8 +168,6 @@ function singinHandler(event) {
       signinErrElement.classList.add("hide");
     }, 2000);
   };
-  
- 
 
   xhr.send(body);
 }
