@@ -37,3 +37,13 @@ https://robustatask.docs.apiary.io/#
 ## Evaluation
 
 There is no fixed goals to check against, depending on the points you tackle and the enhancements you implement your evaluation will be varied from other candidates. However, **For bonus points, implement the solution without using a framework.**
+
+
+## My work
+- used validator.js library for Client-Side Validation, since provides a set of simple and readable validation functions for common use cases. It abstracts away the complexity of writing regular expressions for validation, making your code more concise and easier to understand.
+- The password validation required a custom validation rules.
+- didn't use framework, as mentioned (**For bonus points, implement the solution without using a framework.**).
+- when user login an alert message will be appear instead of redirecting user.
+- used fontawesome, google fonts, validator.js by adding the CDN.
+- added dark & light themes.
+
