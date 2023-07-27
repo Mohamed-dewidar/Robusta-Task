@@ -47,6 +47,7 @@
 
 html {
   font-size: 10px;
+  overflow: auto;
 }
 
 /* reset everything */
@@ -64,6 +65,8 @@ html {
 
 body {
   min-height: 100vh;
+  overflow: auto;
+  font-family: 'Open Sans','Roboto', sans-serif;
 }
 
 img {

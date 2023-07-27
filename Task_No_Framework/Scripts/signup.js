@@ -21,11 +21,11 @@ let signupBtn; // Sign Up button element
 let signupErrElement; // element for singup error message
 
 // script variables
-let fullNameError = true; // boolean to check if the fullname is invalid before submit
-let emailError = true; // boolean to check if the email is invalid before submit
-let userNameError = true; // boolean to check if the username is invalid before submit
-let passwordError = true; // boolean to check if the password is invalid before submit
-let confirmPasswordError = true; // boolean to check if the confirm password is invalid before submit
+let fullNameError = false; // boolean to check if the fullname is invalid before submit
+let emailError = false; // boolean to check if the email is invalid before submit
+let userNameError = false; // boolean to check if the username is invalid before submit
+let passwordError = false; // boolean to check if the password is invalid before submit
+let confirmPasswordError = false; // boolean to check if the confirm password is invalid before submit
 
 // Wait for the page to load before running the script
 addEventListener("load", scriptBegins);
@@ -168,27 +168,34 @@ function isValidPassword(password) {
 
   // Validate at least one uppercase letter
   if (!/[A-Z]/.test(password)) {
-    errMsgs.push("at least one uppercase letter.");
+    errMsgs.push("At least one uppercase letter.");
   }
 
   // Validate at least one lowercase letter
   if (!/[a-z]/.test(password)) {
-    errMsgs.push("at least one lowercase letter.");
+    errMsgs.push("At least one lowercase letter.");
   }
 
   // Validate at least one special character
   if (!/[@$!%*#?&]/.test(password)) {
-    errMsgs.push("least one special character");
+    errMsgs.push("At least one special character.");
   }
 
   // Validate at least one digit (number)
   if (!/\d/.test(password)) {
-    errMsgs.push("at least one number");
+    errMsgs.push("At least one number.");
   }
 
   return errMsgs;
 }
 
+
+/**
+ * 
+ * This Function will get called when click the submit button
+ * - It will return and do no thing if any validation Error where presented
+ * - otherwise it will send the request to server, then wait response
+ */
 async function singupHandler(event) {
   event.preventDefault();
 
@@ -197,7 +204,8 @@ async function singupHandler(event) {
     emailError ||
     userNameError ||
     passwordError ||
-    confirmPasswordError
+    confirmPasswordError || 
+    !event.target.form.reportValidity()
   ) {
     return;
   }

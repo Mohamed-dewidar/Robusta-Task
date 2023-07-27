@@ -14,8 +14,8 @@ let signinBtn; // Sign IN button element
 let signinErrElement; // element for singin error message
 
 // script variables
-let emailError = true; // boolean to check if the email is invalid before submit
-let passwordError = true; // boolean to check if the password is invalid before submit
+let emailError = false; // boolean to check if the email is invalid before submit
+let passwordError = false; // boolean to check if the password is invalid before submit
 
 // Wait for the page to load before running the script
 addEventListener("load", scriptBegins);
@@ -45,8 +45,8 @@ function scriptBegins() {
  */
 
 function validateEmail(event) {
-  let email = event.target.value.trim();
-
+  let email = event.target.value.trim()
+  console.log(email)
   if (!validator.isEmail(email)) {
     emailElement.parentElement.classList.add("invalid");
     emailErrElement.classList.remove("hide");
@@ -101,31 +101,41 @@ function isValidPassword(password) {
 
   // Validate at least one uppercase letter
   if (!/[A-Z]/.test(password)) {
-    errMsgs.push("at least one uppercase letter.");
+    errMsgs.push("At least one uppercase letter.");
   }
 
   // Validate at least one lowercase letter
   if (!/[a-z]/.test(password)) {
-    errMsgs.push("at least one lowercase letter.");
+    errMsgs.push("At least one lowercase letter.");
   }
 
   // Validate at least one special character
   if (!/[@$!%*#?&]/.test(password)) {
-    errMsgs.push("least one special character");
+    errMsgs.push("At least one special character.");
   }
 
   // Validate at least one digit (number)
   if (!/\d/.test(password)) {
-    errMsgs.push("at least one number");
+    errMsgs.push("At least one number.");
   }
 
   return errMsgs;
 }
 
+
+
+
+/**
+ * 
+ * This Function will get called when click the submit button
+ * - It will return and do no thing if any validation Error where presented
+ * - otherwise it will send the request to server, then wait response
+ */
 function singinHandler(event) {
   event.preventDefault();
 
-  if (emailError || passwordError) {
+
+  if (emailError || passwordError || !event.target.form.reportValidity()) {
     return;
   }
 
@@ -147,6 +157,7 @@ function singinHandler(event) {
 
     if (xhr.status === 200) {
       const data = JSON.parse(xhr.responseText);
+      alert(data.message)
     } else {
       signinErrElement.classList.remove("hide");
       setTimeout(() => {
@@ -163,6 +174,8 @@ function singinHandler(event) {
       signinErrElement.classList.add("hide");
     }, 2000);
   };
+  
+ 
 
   xhr.send(body);
 }

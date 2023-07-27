@@ -1,16 +1,28 @@
+
+
+
 /* Responsive  */
+
+/* For screen sizes greater than or equal to 500px  */
 @media screen and (min-width: 500px) {
   html {
     font-size: 12px;
   }
+
+  .form{
+    margin: 2rem 0;
+  }
 }
 
+/* For screen sizes greater than or equal to 800px, tablets and medium-sized screens */
 @media screen and (min-width: 800px) {
   html {
     font-size: 14px;
   }
 }
 
+
+/* For screen sizes greater than or equal to 1200px, larger screens and desktops  */
 @media screen and (min-width: 1200px) {
   html {
     font-size: 16px;
