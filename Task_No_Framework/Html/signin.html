@@ -6,7 +6,9 @@
     <title>Sign up | Robusta</title>
 
     <!--Style Sheets-->
-    <link rel="stylesheet" href="../Styles/style.css" />
+    <link rel="stylesheet" href="../Styles/defaultStyles.css" />
+    <link rel="stylesheet" href="../Styles/styles.css" />
+    <link rel="stylesheet" href="../Styles/responsiveStyles.css" />
 
     <!--Validator.js CDN-->
     <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
@@ -18,28 +20,34 @@
     <script src="../Scripts/signin.js"></script>
   </head>
   <body>
-    <form
+    <form class="form signin"
     >
       <div class="form-group">
-        <span>Email</span>
-        <input type="text" id="email" data-email required />
-        <p class="err-msg hide" data-emailErr>Enter a valid email</p>
+        <div class="input-field-group">
+          <i class="fas fa-envelope"></i>
+          <input type="text" id="email" class='input-field' placeholder="Email" data-email required />
+        </div>
+        <ul class="err-msg hide" data-emailErr>
+          <li>Enter a valid email</lo>
+        </ul>
       </div>
       <div class="form-group">
-        <span>Password</span>
-        <input type="password" id="password" data-password required />
+        <div class="input-field-group">
+          <i class="fas fa-key"></i>
+          <input type="password" id="password" class='input-field' placeholder="Password" data-password required />
+        </div>
         <ul class="err-msg hide" data-passwordErr></ul>
       </div>
       
-      <div>
-          <input type="submit" value="SIGN IN" data-signinBtn />
+      <div class="form-group">
+          <input type="submit" class="submit-btn" value="Sign In" data-signinBtn />
             <p class="err-msg hide" data-signinErr>No Account with that email</p>
       </div>
       
       <div id="loadingSpinner" style="display: none;">
         <i class="fas fa-spinner fa-spin"></i>
       </div>
-      <p>Are you new here? <a href="signup.html">SIGN UP</a></p>
+      <p class="question new-here">Are you new here ? <a href="signup.html">Register</a></p>
     </form>
   </body>
 </html>

@@ -72,12 +72,12 @@ function validateFullname(event) {
   let fullName = event.target.value.trim();
 
   if (!validator.matches(fullName, /^[A-Za-z\s]+$/)) {
-    fullNameElement.classList.add("invalid");
+    fullNameElement.parentElement.classList.add("invalid");
     fullNameErrElement.classList.remove("hide");
     fullNameError = true;
     return;
   }
-  fullNameElement.classList.remove("invalid");
+  fullNameElement.parentElement.classList.remove("invalid");
   fullNameErrElement.classList.add("hide");
   fullNameError = false;
 }
@@ -86,13 +86,13 @@ function validateEmail(event) {
   let email = event.target.value.trim();
 
   if (!validator.isEmail(email)) {
-    emailElement.classList.add("invalid");
+    emailElement.parentElement.classList.add("invalid");
     emailErrElement.classList.remove("hide");
     emailError = true;
     return;
   }
 
-  emailElement.classList.remove("invalid");
+  emailElement.parentElement.classList.remove("invalid");
   emailErrElement.classList.add("hide");
   emailError = false;
 }
@@ -101,13 +101,13 @@ function validateUsername(event) {
   let userName = event.target.value.trim();
 
   if (!validator.isAlpha(userName)) {
-    userNameElement.classList.add("invalid");
+    userNameElement.parentElement.classList.add("invalid");
     userNameErrElement.classList.remove("hide");
     userNameError = true;
     return;
   }
 
-  userNameElement.classList.remove("invalid");
+  userNameElement.parentElement.classList.remove("invalid");
   userNameErrElement.classList.add("hide");
   userNameError = false;
 }
@@ -120,7 +120,7 @@ function validatePassword(event) {
     while (passwordErrElement.firstChild) {
       passwordErrElement.removeChild(passwordErrElement.firstChild);
     }
-    passwordElement.classList.add("invalid");
+    passwordElement.parentElement.classList.add("invalid");
     passwordErrElement.classList.remove("hide");
     passwordError = true;
 
@@ -133,7 +133,7 @@ function validatePassword(event) {
     return;
   }
 
-  passwordElement.classList.remove("invalid");
+  passwordElement.parentElement.classList.remove("invalid");
   passwordErrElement.classList.add("hide");
   passwordError = false;
 }
@@ -142,12 +142,12 @@ function validateConfirmPassword(event) {
   let confirmPassword = event.target.value;
 
   if (confirmPassword !== passwordElement.value) {
-    confirmPasswordElemnt.classList.add("invalid");
+    confirmPasswordElemnt.parentElement.classList.add("invalid");
     confirmPasswordErrElemnt.classList.remove("hide");
     confirmPasswordError = true;
     return;
   }
-  confirmPasswordElemnt.classList.remove("invalid");
+  confirmPasswordElemnt.parentElement.classList.remove("invalid");
   confirmPasswordErrElemnt.classList.add("hide");
   confirmPasswordError = false;
 }

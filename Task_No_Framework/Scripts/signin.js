@@ -2,6 +2,8 @@ var API_URL = "https://private-b2e6827-robustatask.apiary-mock.com";
 var API_PATH_SIGNIN = "/auth/login";
 
 // Variables to store references to HTML elements
+
+
 let emailElement; // Input element for user's email
 let emailErrElement; // element for email error message
 
@@ -46,13 +48,13 @@ function validateEmail(event) {
   let email = event.target.value.trim();
 
   if (!validator.isEmail(email)) {
-    emailElement.classList.add("invalid");
+    emailElement.parentElement.classList.add("invalid");
     emailErrElement.classList.remove("hide");
     emailError = true;
     return;
   }
 
-  emailElement.classList.remove("invalid");
+  emailElement.parentElement.classList.remove("invalid");
   emailErrElement.classList.add("hide");
   emailError = false;
 }
@@ -65,7 +67,7 @@ function validatePassword(event) {
     while (passwordErrElement.firstChild) {
       passwordErrElement.removeChild(passwordErrElement.firstChild);
     }
-    passwordElement.classList.add("invalid");
+    passwordElement.parentElement.classList.add("invalid");
     passwordErrElement.classList.remove("hide");
     passwordError = true;
 
@@ -78,7 +80,7 @@ function validatePassword(event) {
     return;
   }
 
-  passwordElement.classList.remove("invalid");
+  passwordElement.parentElement.classList.remove("invalid");
   passwordErrElement.classList.add("hide");
   passwordError = false;
 }
