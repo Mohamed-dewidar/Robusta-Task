@@ -135,7 +135,7 @@ h2::first-letter {
 
 /* Global classes */
 .invalid {
-  border-bottom: 1px solid var(--color-error);
+  border-bottom: 1px solid var(--color-error) !important;
 }
 
 .err-msg {

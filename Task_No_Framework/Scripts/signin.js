@@ -12,8 +12,8 @@ let signinBtn; // Sign IN button element
 let signinErrElement; // element for singin error message
 
 // script variables
-let emailError = false; // boolean to check if the email is invalid before submit
-let passwordError = false; // boolean to check if the password is invalid before submit
+let emailError = true; // boolean to check if the email is invalid before submit
+let passwordError = true; // boolean to check if the password is invalid before submit
 
 // Wait for the page to load before running the script
 addEventListener("load", scriptBegins);
@@ -45,6 +45,12 @@ function scriptBegins() {
 function validateEmail(event) {
   let email = event.target.value.trim();
 
+  // don't show errors, if user lose focus and field empty
+  if(!email){
+    return
+  }
+
+  // show errors, if user lose focus and field invalid
   if (!validator.isEmail(email)) {
     emailElement.parentElement.classList.add("invalid");
     emailErrElement.classList.remove("hide");
@@ -52,6 +58,7 @@ function validateEmail(event) {
     return;
   }
 
+  // field is valid
   emailElement.parentElement.classList.remove("invalid");
   emailErrElement.classList.add("hide");
   emailError = false;
@@ -61,6 +68,12 @@ function validatePassword(event) {
   let password = event.target.value;
   let errMsgs = isValidPassword(password);
 
+  // don't show errors, if user lose focus and field empty
+  if(!password){
+    return
+  }
+
+  // show errors, if user lose focus and field invalid
   if (errMsgs.length) {
     while (passwordErrElement.firstChild) {
       passwordErrElement.removeChild(passwordErrElement.firstChild);
@@ -78,6 +91,7 @@ function validatePassword(event) {
     return;
   }
 
+  // field is valid
   passwordElement.parentElement.classList.remove("invalid");
   passwordErrElement.classList.add("hide");
   passwordError = false;
@@ -129,6 +143,7 @@ function isValidPassword(password) {
 function singinHandler(event) {
   event.preventDefault();
 
+  // show errors, if user submit and data not valid
   if (!event.target.form.reportValidity() || emailError || passwordError) {
     return;
   }

@@ -21,11 +21,11 @@ let signupBtn; // Sign Up button element
 let signupErrElement; // element for singup error message
 
 // script variables
-let fullNameError = false; // boolean to check if the fullname is invalid before submit
-let emailError = false; // boolean to check if the email is invalid before submit
-let userNameError = false; // boolean to check if the username is invalid before submit
-let passwordError = false; // boolean to check if the password is invalid before submit
-let confirmPasswordError = false; // boolean to check if the confirm password is invalid before submit
+let fullNameError = true; // boolean to check if the fullname is invalid before submit
+let emailError = true; // boolean to check if the email is invalid before submit
+let userNameError = true; // boolean to check if the username is invalid before submit
+let passwordError = true; // boolean to check if the password is invalid before submit
+let confirmPasswordError = true; // boolean to check if the confirm password is invalid before submit
 
 // Wait for the page to load before running the script
 addEventListener("load", scriptBegins);
@@ -71,12 +71,20 @@ function scriptBegins() {
 function validateFullname(event) {
   let fullName = event.target.value.trim();
 
+  // don't show errors, if user lose focus and field empty
+  if (!fullName) {
+    return;
+  }
+
+  // show errors, if user lose focus and field invalid
   if (!validator.matches(fullName, /^[A-Za-z\s]+$/)) {
     fullNameElement.parentElement.classList.add("invalid");
     fullNameErrElement.classList.remove("hide");
     fullNameError = true;
     return;
   }
+
+  // field is valid
   fullNameElement.parentElement.classList.remove("invalid");
   fullNameErrElement.classList.add("hide");
   fullNameError = false;
@@ -85,6 +93,12 @@ function validateFullname(event) {
 function validateEmail(event) {
   let email = event.target.value.trim();
 
+  // don't show errors, if user lose focus and field empty
+  if (!email) {
+    return;
+  }
+
+  // show errors, if user lose focus and field invalid
   if (!validator.isEmail(email)) {
     emailElement.parentElement.classList.add("invalid");
     emailErrElement.classList.remove("hide");
@@ -92,6 +106,7 @@ function validateEmail(event) {
     return;
   }
 
+  // field is valid
   emailElement.parentElement.classList.remove("invalid");
   emailErrElement.classList.add("hide");
   emailError = false;
@@ -100,6 +115,12 @@ function validateEmail(event) {
 function validateUsername(event) {
   let userName = event.target.value.trim();
 
+  // don't show errors, if used lose focus and field empty
+  if (!userName) {
+    return;
+  }
+
+  // show errors, if user lose focus and field invalid
   if (!validator.isAlpha(userName)) {
     userNameElement.parentElement.classList.add("invalid");
     userNameErrElement.classList.remove("hide");
@@ -107,6 +128,7 @@ function validateUsername(event) {
     return;
   }
 
+  // field is valid
   userNameElement.parentElement.classList.remove("invalid");
   userNameErrElement.classList.add("hide");
   userNameError = false;
@@ -116,6 +138,12 @@ function validatePassword(event) {
   let password = event.target.value;
   let errMsgs = isValidPassword(password);
 
+  // don't show errors, if user lose focus and field empty
+  if (!password) {
+    return;
+  }
+
+  // show errors, if user lose focus and field invalid
   if (errMsgs.length) {
     while (passwordErrElement.firstChild) {
       passwordErrElement.removeChild(passwordErrElement.firstChild);
@@ -133,6 +161,7 @@ function validatePassword(event) {
     return;
   }
 
+  // field is valid
   passwordElement.parentElement.classList.remove("invalid");
   passwordErrElement.classList.add("hide");
   passwordError = false;
@@ -141,12 +170,20 @@ function validatePassword(event) {
 function validateConfirmPassword(event) {
   let confirmPassword = event.target.value;
 
+  // don't show errors, if user lose focus and field empty
+  if (!confirmPassword) {
+    return;
+  }
+
+  // show errors, if user lose focus and field invalid
   if (confirmPassword !== passwordElement.value) {
     confirmPasswordElemnt.parentElement.classList.add("invalid");
     confirmPasswordErrElemnt.classList.remove("hide");
     confirmPasswordError = true;
     return;
   }
+
+  // field is valid
   confirmPasswordElemnt.parentElement.classList.remove("invalid");
   confirmPasswordErrElemnt.classList.add("hide");
   confirmPasswordError = false;
@@ -189,9 +226,8 @@ function isValidPassword(password) {
   return errMsgs;
 }
 
-
 /**
- * 
+ *
  * This Function will get called when click the submit button
  * - It will return and do no thing if any validation Error where presented
  * - otherwise it will send the request to server, then wait response
@@ -199,6 +235,8 @@ function isValidPassword(password) {
 async function singupHandler(event) {
   event.preventDefault();
 
+
+  // show errors, if user submit and data not valid
   if (
     !event.target.form.reportValidity() ||
     fullNameError ||
@@ -206,7 +244,6 @@ async function singupHandler(event) {
     userNameError ||
     passwordError ||
     confirmPasswordError
-    
   ) {
     return;
   }
@@ -229,16 +266,16 @@ async function singupHandler(event) {
     });
     let data = await res.json();
     signupErrElement.textContent = data.message;
-    signupErrElement.style.color = 'green'
+    signupErrElement.style.color = "green";
     console.log(data);
   } catch (e) {
-    signupErrElement.textContent = 'Something went wrong';
+    signupErrElement.textContent = "Something went wrong";
   }
 
   signupErrElement.classList.remove("hide");
   setTimeout(() => {
     signupErrElement.classList.add("hide");
-    window.location.href = '../Html/signin.html'
+    window.location.href = "../Html/signin.html";
   }, 2000);
   loadingSpinner.style.display = "none";
 }

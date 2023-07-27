@@ -32,7 +32,7 @@
       <div class="form-group">
         <div class="input-field-group" data-inputfieldgroup>
           <i class="fas fa-user"></i>
-          <input type="text" id="name"  class='input-field' placeholder="Full Name" data-fullname required />
+          <input type="text" id="name"  class='input-field' placeholder="Full Name"  data-fullname required />
         </div>
         <ul class="err-msg hide" data-fullnameErr>
           <li>Enter a valid full name</li>
@@ -41,7 +41,8 @@
       <div class="form-group">
         <div class="input-field-group" data-inputfieldgroup>
           <i class="fas fa-envelope"></i>
-          <input type="text" id="email" class='input-field' placeholder="Email" data-email required />
+          <label id="email-label" for="email" class="sr-only-focusable">Email</label>
+          <input type="text" id="email" class='input-field' placeholder="Email" aria-labelledby="email-label" aria-label="Email" data-email required />
         </div>
         <ul class="err-msg hide" data-emailErr>
           <li>Enter a valid email</li>
@@ -60,22 +61,25 @@
       <div class="form-group">
         <div class="input-field-group" data-inputfieldgroup>
           <i class="fas fa-key"></i>
-        <input type="password" id="password" class='input-field' placeholder="Password" data-password required />
+          <label id="password-label" for="password" class="sr-only-focusable">Password</label>
+        <input type="password" id="password" class='input-field' placeholder="Password" aria-describedby="password-instructions" aria-labelledby="password-label" aria-label="Password" data-password required />
         </div>
         <ul class="err-msg hide" data-passwordErr></ul>
       </div>
       <div class="form-group">
         <div class="input-field-group" data-inputfieldgroup>
           <i class="fas fa-key"></i>
+          <label id="confirmPassword-label" for="password" class="sr-only-focusable">Password</label>
         <input
           type="password"
           id="confirm-password"
           class='input-field' placeholder="Confirm Password"
+          aria-describedby="confirmPassword-instructions" aria-labelledby="confirmPassword-label" aria-label="Confirm Password"
           data-confirmPassword
           required
         />
         </div>
-        <p class="err-msg hide" data-confirmPasswordErr>
+        <p id="confirmPassword-instructions" class="err-msg hide" data-confirmPasswordErr>
           Password doesn't match
         </p>
       </div>

@@ -49,7 +49,8 @@
       <div class="form-group">
         <div class="input-field-group" data-inputfieldgroup>
           <i class="fas fa-key"></i>
-          <input type="password" id="password" class='input-field' placeholder="Password" aria-describedby="password-instructions" data-password required />
+          <label id="password-label" for="password" class="sr-only-focusable">Password</label>
+          <input type="password" id="password" class='input-field' placeholder="Password" aria-describedby="password-instructions" aria-labelledby="password-label" aria-label="Password" data-password required />
         </div>
         <ul  id="password-instructions"class="err-msg hide" data-passwordErr></ul>
       </div>
