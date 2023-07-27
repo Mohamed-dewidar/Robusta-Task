@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../Styles/defaultStyles.css" />
     <link rel="stylesheet" href="../Styles/styles.css" />
     <link rel="stylesheet" href="../Styles/responsiveStyles.css" />
+    <link rel="stylesheet" href="../Styles/darkTheme.css" />
 
 
     <!--Validator.js CDN-->
@@ -24,15 +25,18 @@
 
     <!--Scripts-->
     <script src="../Scripts/signin.js"></script>
+    <script src="../Scripts/script.js"></script>
+
+
   </head>
   <body>
     <form class="form signin"
     >
-    <img src="../Assets/icons8-loading-infinity.gif">
+    <img src="../Assets/infinity-light.gif" data-logo>
     <h2>Infinity</h2>
 
       <div class="form-group" >
-        <div class="input-field-group">
+        <div class="input-field-group" data-inputfieldgroup>
           <i class="fas fa-envelope"></i>
           <label id="email-label" for="email" class="sr-only-focusable">Email</label>
           <input type="text" id="email" class='input-field' placeholder="Email" aria-labelledby="email-label" aria-label="Email" data-email required />
@@ -43,7 +47,7 @@
       </div>
 
       <div class="form-group">
-        <div class="input-field-group">
+        <div class="input-field-group" data-inputfieldgroup>
           <i class="fas fa-key"></i>
           <input type="password" id="password" class='input-field' placeholder="Password" aria-describedby="password-instructions" data-password required />
         </div>
@@ -60,5 +64,7 @@
       </div>
       <p class="question new-here">Are you new here ? <a href="signup.html">Register</a></p>
     </form>
+
+    <button class="theme-btn" data-themeBtn><i class="fas fa-moon" data-themeIcon></i></button>
   </body>
 </html>

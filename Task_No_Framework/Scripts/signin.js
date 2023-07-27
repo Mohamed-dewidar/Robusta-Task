@@ -2,8 +2,6 @@ var API_URL = "https://private-b2e6827-robustatask.apiary-mock.com";
 var API_PATH_SIGNIN = "/auth/login";
 
 // Variables to store references to HTML elements
-
-
 let emailElement; // Input element for user's email
 let emailErrElement; // element for email error message
 
@@ -135,7 +133,7 @@ function singinHandler(event) {
   event.preventDefault();
 
 
-  if (emailError || passwordError || !event.target.form.reportValidity()) {
+  if (!event.target.form.reportValidity() || emailError || passwordError) {
     return;
   }
 

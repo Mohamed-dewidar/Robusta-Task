@@ -200,12 +200,13 @@ async function singupHandler(event) {
   event.preventDefault();
 
   if (
+    !event.target.form.reportValidity() ||
     fullNameError ||
     emailError ||
     userNameError ||
     passwordError ||
-    confirmPasswordError || 
-    !event.target.form.reportValidity()
+    confirmPasswordError
+    
   ) {
     return;
   }

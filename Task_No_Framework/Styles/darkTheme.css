@@ -1,0 +1,35 @@
+
+
+body.dark-theme::after{
+    background-color: rgb(0 0 0/ 0.9);
+}
+
+.form.dark-theme{
+ color: wheat;
+  background-color: var(--bs-dark);
+  box-shadow: 0 0 1em black;
+  border-radius: 1rem;
+  z-index: 999;
+
+}
+
+.input-field-group.dark-theme{
+    border-bottom: 1px solid var(--bs-yellow);
+}
+
+.input-field.dark-theme{
+    background-color: var(--bs-dark);
+}
+.input-field.dark-theme::placeholder{
+    color: wheat
+}
+
+.question.dark-theme{
+    color: rgb(255 255 255/ 0.7)
+}
+
+.theme-btn.dark-theme{
+    color: var(--bs-yellow);
+    background-color:var(--bs-dark); 
+    border: 2px solid var(--bs-dark);
+}

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../Styles/defaultStyles.css" />
     <link rel="stylesheet" href="../Styles/styles.css" />
     <link rel="stylesheet" href="../Styles/responsiveStyles.css" />
+    <link rel="stylesheet" href="../Styles/darkTheme.css" />
 
     <!-- Add the Font Awesome CSS link -->
     <link
@@ -21,13 +22,15 @@
 
     <!--Scripts-->
     <script src="../Scripts/signup.js"></script>
+    <script src="../Scripts/script.js"></script>
+
   </head>
   <body>
     <form class="form signup">
-      <img src="../Assets/icons8-loading-infinity.gif">
+      <img  src="../Assets/infinity-light.gif" data-logo>
       <h2>Infinity</h2>
       <div class="form-group">
-        <div class="input-field-group">
+        <div class="input-field-group" data-inputfieldgroup>
           <i class="fas fa-user"></i>
           <input type="text" id="name"  class='input-field' placeholder="Full Name" data-fullname required />
         </div>
@@ -36,7 +39,7 @@
         </ul>
       </div>
       <div class="form-group">
-        <div class="input-field-group">
+        <div class="input-field-group" data-inputfieldgroup>
           <i class="fas fa-envelope"></i>
           <input type="text" id="email" class='input-field' placeholder="Email" data-email required />
         </div>
@@ -45,7 +48,7 @@
         </ul>
       </div>
       <div class="form-group">
-        <div class="input-field-group">
+        <div class="input-field-group" data-inputfieldgroup>
           <i class="fas fa-user"></i>
           <input type="text" id="username" class='input-field' placeholder="User Name" data-username required />
         </div>
@@ -55,14 +58,14 @@
         </ul>
       </div>
       <div class="form-group">
-        <div class="input-field-group">
+        <div class="input-field-group" data-inputfieldgroup>
           <i class="fas fa-key"></i>
         <input type="password" id="password" class='input-field' placeholder="Password" data-password required />
         </div>
         <ul class="err-msg hide" data-passwordErr></ul>
       </div>
       <div class="form-group">
-        <div class="input-field-group">
+        <div class="input-field-group" data-inputfieldgroup>
           <i class="fas fa-key"></i>
         <input
           type="password"
@@ -86,5 +89,7 @@
       </div>
       <p class="question has-account">Already has an account ? <a href="signin.html">SIGN IN</a></p>
     </form>
+
+    <button class="theme-btn" data-themeBtn><i class="fas fa-moon" data-themeIcon></i></button>
   </body>
 </html>
